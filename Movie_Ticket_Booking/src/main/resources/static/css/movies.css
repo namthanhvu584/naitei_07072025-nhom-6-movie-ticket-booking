@@ -1,0 +1,55 @@
+/* Filter Form */
+.filter-form {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+}
+.filter-form .form-select {
+    max-width: 220px;
+    border-radius: 12px;
+}
+.filter-form .form-select:focus {
+    border-color: #2cb5e8;
+    box-shadow: 0 0 6px rgba(44,181,232,0.4);
+}
+
+/* Table */
+.table-responsive {
+    background-color: #ffffff;
+    padding: 0.5rem;
+}
+.table thead th {
+    background-color: #1f3c88;
+    color: white;
+    padding: 12px;
+    border: none;
+}
+.table tbody tr:hover {
+    background-color: #f1f5f9;
+}
+.table tbody td {
+    padding: 12px;
+}
+
+/* Buttons */
+.btn-info, .btn-secondary {
+    border-radius: 18px;
+    padding: 6px 18px;
+    font-weight: 500;
+}
+
+/* Pagination */
+.pagination .page-link {
+    border-radius: 50%;
+    color: #1f3c88;
+    margin: 0 3px;
+    border: 1px solid #dee2e6;
+}
+.pagination .page-item.active .page-link {
+    background-color: #2cb5e8;
+    border-color: #2cb5e8;
+    color: white;
+}
+.pagination .page-item:not(.active) .page-link:hover {
+    background-color: #e9ecef;
+}

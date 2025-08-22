@@ -1,0 +1,30 @@
+package com.org.Movie_Ticket_Booking.repository;
+
+import com.org.Movie_Ticket_Booking.entity.Movie;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+
+import java.util.List;
+
+public interface MovieRepository extends JpaRepository<Movie, Long> {
+
+
+    // Lấy danh sách phim theo rạp - phân trang
+    @Query("SELECT m FROM Movie m JOIN m.cinemas c WHERE c.id = :cinemaId")
+    Page<Movie> findAllByCinemaId(@Param("cinemaId") Long cinemaId, Pageable pageable);
+
+    // Lấy danh sách phim theo rạp KHÔNG PHÂN TRANG
+    @Query("SELECT m FROM Movie m JOIN m.cinemas c WHERE c.id = :cinemaId")
+    List<Movie> findAllByCinemaId(@Param("cinemaId") Long cinemaId);
+
+    // Lấy phim chưa có trong rạp
+    @Query("SELECT m FROM Movie m WHERE m.id NOT IN (SELECT m2.id FROM Movie m2 JOIN m2.cinemas c WHERE c.id = :cinemaId)")
+    Page<Movie> findAllNotInCinema(@Param("cinemaId") Long cinemaId, Pageable pageable);
+
+  
+    @Query("SELECT EXISTS (SELECT 1 FROM Movie m JOIN m.cinemas c WHERE c.id = :cinemaId AND m.id = :movieId)")
+    boolean existsInCinema(@Param("cinemaId") Long cinemaId, @Param("movieId") Long movieId);
+}
